@@ -45,12 +45,12 @@ class ViewController: UIViewController {
 
     @IBAction func doneButtonPressed() {
         guard let inputText = textField.text, !inputText.isEmpty else {
-            print("Text field is empty")
+            showAlert(with: "Text field is empty", and: "Please enter your name")
             return
         }
         
         if let _ = Double(inputText) {
-            print("Wrong format")
+            showAlert(with: "Wrong format", and: "Please enter your name")
             return
         }
         
@@ -75,3 +75,14 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK: - UIAlertController
+extension ViewController {
+    private func showAlert(with title: String, and message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okActian = UIAlertAction(title: "OK", style: .default) { _ in
+            self.textField.text = ""
+        }
+        alert.addAction(okActian)
+        present(alert, animated: true)
+    }
+}
