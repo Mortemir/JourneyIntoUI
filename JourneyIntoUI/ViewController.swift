@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     @IBOutlet var slider: UISlider!
     @IBOutlet var textField: UITextField!
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var switchLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
         }
     }
     
+   
     @IBAction func sliderAction() {
         mainLabel.text = "\(slider.value)"
         view.backgroundColor = view.backgroundColor?.withAlphaComponent(CGFloat(slider.value))
@@ -55,6 +58,17 @@ class ViewController: UIViewController {
         }
         
         mainLabel.text = textField.text
+    }
+    
+    @IBAction func datePickerAction() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        mainLabel.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    @IBAction func switchAction(_ sender: UISwitch) {
+        datePicker.isHidden = !sender.isOn
+        switchLabel.text = sender.isOn ? "Hide Date Picker" : "Show Date Picker"
     }
     
     
